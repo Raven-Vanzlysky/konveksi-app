@@ -1,29 +1,22 @@
-<!doctype html>
-<html lang="id">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pemesanan Konveksi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+<?php
 
-<!-- HEADER -->
-<div class="bg-dark text-white py-4 mb-4">
-  <div class="container">
-    <h3 class="mb-0">Larissa Collection</h3>
-    <small>Solusi pakaian custom berkualitas</small>
-  </div>
-</div>
+  $title = 'Pemesanan Konveksi';
+  $halmut = '../../';
+  $halpem = './';
+
+  include '../../assets/layout/users/header.php';
+
+?>
+
+
 
 <div class="container mb-5">
 
   <!-- HERO -->
-  <div class="p-4 p-md-5 mb-4 bg-white rounded shadow-sm">
+  <div class="p-4 p-md-5 mb-4 mt-5 bg-body rounded shadow-sm">
     <div class="row align-items-center">
       <div class="col-md-8">
-        <h2>Pesan Pakaian Custom Sekarang 👕</h2>
+        <h2>Pesan Pakaian Custom Sekarang</h2>
         <p class="text-muted">Melayani kaos, hoodie, jaket, dan kemeja dengan kualitas terbaik.</p>
       </div>
 
@@ -41,7 +34,7 @@
       <div class="card shadow-sm border-0">
         <div class="card-body">
 
-          <h5 class="mb-3">📝 Data Pemesan</h5>
+          <h5 class="mb-3"><i class="bi bi-clipboard2 me-2"></i>Data Pemesan</h5>
 
           <form method="POST" enctype="multipart/form-data">
             
@@ -63,7 +56,7 @@
 
             <hr>
 
-            <h5 class="mb-3">👕 Detail Pesanan</h5>
+            <h5 class="mb-3"><i class="bi bi-pencil-square me-2"></i>Detail Pesanan</h5>
 
             <div class="row">
               <div class="col-md-6 mb-3">
@@ -114,7 +107,7 @@
             </div>
 
             <button class="btn btn-success w-100">
-              🚀 Kirim Pesanan
+              <i class="bi bi-cart-plus me-2"></i>Kirim Pesanan
             </button>
 
           </form>
@@ -129,7 +122,7 @@
       <!-- ESTIMASI -->
       <div class="card shadow-sm border-0 mb-4">
         <div class="card-body">
-          <h5>💰 Estimasi Harga</h5>
+          <h5><i class="bi bi-cash-coin me-2"></i>Estimasi Harga</h5>
 
           <ul class="list-group list-group-flush">
             <li class="list-group-item d-flex justify-content-between">
@@ -152,13 +145,13 @@
       <!-- KEUNGGULAN -->
       <div class="card shadow-sm border-0">
         <div class="card-body">
-          <h5>⭐ Kenapa Pilih Kami?</h5>
+          <h5><i class="bi bi-star-fill"></i> Kenapa Pilih Kami?</h5>
 
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">✔ Bahan Premium</li>
-            <li class="list-group-item">✔ Jahitan Rapi</li>
-            <li class="list-group-item">✔ Bisa Custom Design</li>
-            <li class="list-group-item">✔ Harga Terjangkau</li>
+            <li class="list-group-item"><i class="bi bi-check2 me-2"></i>Bahan Premium</li>
+            <li class="list-group-item"><i class="bi bi-check2 me-2"></i>Jahitan Rapi</li>
+            <li class="list-group-item"><i class="bi bi-check2 me-2"></i>Bisa Custom Design</li>
+            <li class="list-group-item"><i class="bi bi-check2 me-2"></i>Harga Terjangkau</li>
           </ul>
         </div>
       </div>
@@ -168,11 +161,8 @@
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="bg-dark text-white text-center py-3">
-    <small>&copy; 2026 Larissa Collection</small>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-</footer>
+<?php
 
-</body>
-</html>
+  include '../../assets/layout/users/footer.php';
+
+?>

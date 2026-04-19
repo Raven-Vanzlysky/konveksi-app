@@ -1,48 +1,12 @@
-<!DOCTYPE html>
-<html lang="id" data-bs-theme="light">
+<?php
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Katalog Jasa Konveksi</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
+    $title = 'Landing Page Konveksi';
+    $halmut = './';
+    $halpem = 'app/users/';
 
-    <body>
+    include 'assets/layout/users/header.php';
 
-        <!-- HEADER -->
-        <header class="sticky-top">
-            <nav class="navbar navbar-expand-lg navbar-success bg-success">
-                <div class="container">
-                    
-                    <!-- BRAND (KIRI SENDIRI) -->
-                    <a class="navbar-brand fw-bold" href="#">Larisa Collection</a>
-
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <!-- BAGIAN KANAN -->
-                    <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNav">
-
-                        <!-- TOGGLE -->
-                        <div class="form-check form-switch text-white me-3">
-                            <input class="form-check-input" type="checkbox" id="themeSwitch">
-                            <label class="form-check-label" for="themeSwitch">Dark</label>
-                        </div>
-
-                        <!-- MENU -->
-                        <ul class="navbar-nav">
-                            <li class="nav-item"><a class="nav-link" href="#katalog">Katalog</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#keunggulan">Keunggulan</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-                        </ul>
-
-                    </div>
-
-                </div>
-            </nav>
-        </header>
+?>
 
         <!-- MAIN CONTENT -->
         <main>
@@ -174,33 +138,8 @@
 
         </main>
 
-        <!-- FOOTER -->
-        <footer class="bg-secondary text-white text-center py-3">
-            <div class="container">
-                <small>&copy; 2026 Larisa Collection. All Rights Reserved.</small>
-            </div>
-        </footer>
+<?php
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    include 'assets/layout/users/footer.php';
 
-        <script>
-            const themeSwitch = document.getElementById('themeSwitch');
-            const html = document.documentElement;
-
-            // Load saved theme
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                html.setAttribute('data-bs-theme', savedTheme);
-                themeSwitch.checked = savedTheme === 'dark';
-            }
-
-            themeSwitch.addEventListener('change', function () {
-                const theme = this.checked ? 'dark' : 'light';
-                html.setAttribute('data-bs-theme', theme);
-                localStorage.setItem('theme', theme);
-            });
-        </script>
-
-    </body>
-
-</html>
+?>
