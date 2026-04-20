@@ -1,7 +1,8 @@
 <?php
-    function active($file, $laman) {
-        return $laman == $file ? 'active' : '';
-    }
+
+    // Koneksi ke database
+    include '../../config/controller/db.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +35,7 @@
                 <nav aria-label="Sidebar Navigation">
                     <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item"><a href="./" class="nav-link <?= active('Dashboard',$laman);?> text-white"><i class="bi bi-house-door me-2"></i>Dashboard</a></li>
-                    <li class="nav-item"><a href="admin_user.php" class="nav-link <?= active('Users', $laman);?> text-white"><i class="bi bi-people me-2"></i>Users</a></li>
+                    <li class="nav-item"><a href="admin_user.php" class="nav-link <?= active('Pengguna', $laman);?> text-white"><i class="bi bi-people me-2"></i>Pengguna</a></li>
                     <li class="nav-item"><a href="admin_produk.php" class="nav-link <?= active('Product', $laman);?> text-white"><i class="bi bi-basket me-2"></i>Product</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-white"><i class="bi bi-gear me-2"></i>Settings</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-white"><i class="bi bi-file-earmark-text me-2"></i>Reports</a></li>
