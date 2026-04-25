@@ -1,7 +1,8 @@
 <?php
 
-    // Koneksi ke database
-    include '../../config/controller/db.php';
+    // Koneksi ke database dan backend
+    require_once '../../config/db/db.php';
+    require_once '../../config/controller/controller.php';
 
 ?>
 
@@ -74,16 +75,15 @@
                             <i class="bi bi-list"></i>
                         </button>
 
-                        <a class="navbar-brand" href="#"><?= $laman; ?></a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarContent">
-                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-                            <li class="nav-item me-2 me-md-3"><a class="nav-link position-relative" href="#"><i class="bi bi-bell fs-5"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span></a></li>
-                            <li class="nav-item me-2 me-md-3"><a class="nav-link" href="#"><i class="bi bi-envelope fs-5"></i></a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-gear fs-5"></i></a></li>
-                            </ul>
+                        <span class="navbar-brand mb-0 fw-semibold" href="#"><?= $laman; ?></span>
+                       
+                         <div class="ms-auto d-flex align-items-center gap-3">
+                            <a href="#" class="position-relative text-dark">
+                                <i class="bi bi-bell fs-5"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+                            </a>
+                            <!-- <a href="#" class="text-dark"><i class="bi bi-envelope fs-5"></i></a>
+                            <a href="#" class="text-dark"><i class="bi bi-gear fs-5"></i></a> -->
                         </div>
                     </div>
                 </nav>

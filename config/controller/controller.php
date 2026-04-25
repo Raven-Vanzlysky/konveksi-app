@@ -42,6 +42,14 @@
             $no_hp     = htmlspecialchars(strip_tags($post['no_hp']));
             $alamat    = htmlspecialchars(strip_tags($post['alamat']));
             $role     = htmlspecialchars(strip_tags($post['role']));
+
+            // Cek role
+            if (empty($_POST['role'])) {
+                echo "<script>
+                alert('Role wajib dipilih!');
+                document.location.href = 'admin_user.php';
+              </script>";
+            }
             
             // enkripsi password
             $password = password_hash($password, PASSWORD_DEFAULT);
