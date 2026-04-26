@@ -35,11 +35,12 @@
 
                 <nav aria-label="Sidebar Navigation">
                     <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item"><a href="./" class="nav-link <?= active('Dashboard',$laman);?> text-white"><i class="bi bi-house-door me-2"></i>Dashboard</a></li>
-                    <li class="nav-item"><a href="admin_user.php" class="nav-link <?= active('Pengguna', $laman);?> text-white"><i class="bi bi-people me-2"></i>Pengguna</a></li>
-                    <li class="nav-item"><a href="admin_produk.php" class="nav-link <?= active('Product', $laman);?> text-white"><i class="bi bi-basket me-2"></i>Product</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white"><i class="bi bi-gear me-2"></i>Settings</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white"><i class="bi bi-file-earmark-text me-2"></i>Reports</a></li>
+                    <li class="nav-item"><a href="./" class="nav-link <?= ($laman == 'Dashboard') ? 'active' : '' ?> text-white"><i class="bi bi-house-door me-2"></i>Dashboard</a></li>
+                    <li class="nav-item"><a href="admin_user.php" class="nav-link <?= ($laman == 'Pengguna') ? 'active' : '' ?> text-white"><i class="bi bi-people me-2"></i>Pengguna</a></li>
+                    <li class="nav-item"><a href="admin_pesanan.php" class="nav-link <?= ($laman == 'Pesanan') ? 'active' : '' ?> text-white"><i class="bi bi-bag me-2"></i>Pesanan</a></li>
+                    <li class="nav-item"><a href="admin_produk.php" class="nav-link <?= ($laman == 'Produk') ? 'active' : '' ?> text-white"><i class="bi bi-basket me-2"></i>Produk</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white"><i class="bi bi-file-earmark-text me-2"></i>Laporan</a></li>
+                    <!-- <li class="nav-item"><a href="#" class="nav-link text-white"><i class="bi bi-gear me-2"></i>Settings</a></li> -->
                     </ul>
                 </nav>
 
@@ -47,7 +48,7 @@
 
                 <div class="dropdown">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="https://via.placeholder.com/32" alt="User" class="rounded-circle me-2">
+                    <img src="https://placehold.co/32x32" alt="User" class="rounded-circle me-2">
                     <strong>Admin</strong>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">

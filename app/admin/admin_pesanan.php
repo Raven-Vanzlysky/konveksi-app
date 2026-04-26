@@ -1,6 +1,6 @@
 <?php
 
-    $laman = 'Produk';
+    $laman = 'Pesanan';
     include '../../assets/layout/admin/header.php';
 
 ?>
@@ -9,7 +9,7 @@
     <main class="overflow-auto" style="flex:1;">
 
         <!-- Actions -->
-        <section class="mb-3 mb-md-4" aria-label="Bahan Actions">
+        <section class="mb-3 mb-md-4" aria-label="Validasi Actions">
             <h5 class="mb-2">Actions</h5>
             <div class="d-flex flex-wrap gap-2">
             <button class="btn btn-primary"><i class="bi bi-person-plus me-1"></i>Add User</button>
@@ -20,8 +20,8 @@
         </section>
 
         <!-- Table Data Dummy -->
-        <section class="mb-4 mb-md-5" aria-label="Bahan Table">
-            <h5 class="mb-2">Bahan</h5>
+        <section class="mb-4 mb-md-5" aria-label="Validasi Table">
+            <h5 class="mb-2">Validasi Pesanan</h5>
             <div class="table-responsive">
             <table class="table table-striped table-hover align-middle mb-0">
                 <thead class="table-dark">
@@ -63,7 +63,7 @@
         </section>
 
         <!-- Actions -->
-        <section class="mb-3 mb-md-4" aria-label="Design Actions">
+        <section class="mb-3 mb-md-4" aria-label="Kelola Actions">
             <h5 class="mb-2">Actions</h5>
             <div class="d-flex flex-wrap gap-2">
             <button class="btn btn-primary"><i class="bi bi-person-plus me-1"></i>Add User</button>
@@ -74,8 +74,8 @@
         </section>
 
         <!-- Table Data Dummy -->
-        <section class="mb-2" aria-label="Design Table">
-            <h5 class="mb-2">Design</h5>
+        <section class="mb-2" aria-label="Kelola Table">
+            <h5 class="mb-2">Kelola Pesanan</h5>
             <div class="table-responsive">
             <table class="table table-striped table-hover align-middle mb-0">
                 <thead class="table-dark">

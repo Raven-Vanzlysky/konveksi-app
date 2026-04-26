@@ -2,6 +2,7 @@
 
     // Halaman
     $laman = 'Pengguna';
+    $fileLaman = 'admin_user.php';
 
     // Header
     include '../../assets/layout/admin/header.php';
@@ -11,9 +12,10 @@
         if(isset($_POST['cari'])) 
         {
             $kata_cari = htmlspecialchars(strip_tags($_POST['kata_cari']));
-            $data_akun = select("SELECT * FROM akun WHERE CONCAT(nama, email, alamat, role) LIKE '%$kata_cari%' ORDER BY nama ASC");
-        } else {
-            $data_akun = select("SELECT * FROM akun");
+            $data_akun = select("SELECT * FROM akun WHERE CONCAT(nama, username, email, no_hp, alamat, role) LIKE '%$kata_cari%' ORDER BY role ASC, nama ASC");
+        } else 
+        {
+            $data_akun = select("SELECT * FROM akun ORDER BY role ASC, nama ASC");
         }
 
         // jika tombol tambah di tekan jalankan script berikut
@@ -52,29 +54,11 @@
     
 ?>
 
-    <!-- Dashboard Main -->
+    <!-- Pengguna Main -->
     <main class="overflow-auto" style="flex:1;">
         
         <!-- Popup -->
-        <section aria-label="Popup">
-            <?php if ($popup == true) :?>
-                <div class="modal fade show" style="display:block;">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header bg-<?= $warnaPopup;?>">
-                                <h5 class="modal-title"><?= $statusPopup;?></h5>
-                            </div>
-                            <div class="modal-body">
-                                <i class="bi bi-<?= $iconPopup;?> me-2"></i><?= $laman;?> <?= $statusPopup;?> <?= $popupEksekusi;?>!
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-<?= $warnaPopup;?>" data-bs-dismiss="modal" onclick="klik()">OK</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endif;?>
-        </section>
+            <?php require_once '../popup.php';?>
         <!-- .Popup -->
 
         <!-- View Data Akun -->
@@ -135,19 +119,19 @@
                                     <?php foreach ($data_akun as $akun) : ?>
                                         <tr style="height: 10px;">
                                         <td scope="row" class="text-center"><?= $no++; ?></td>
-                                        <td><?= $akun['nama']; ?></td>
-                                        <td><?= $akun['username']; ?></td>
-                                        <td><?= $akun['email']; ?></td>
-                                        <td><?= $akun['no_hp']; ?></td>
-                                        <td><?= $akun['alamat']; ?></td>
-                                        <td class="text-center"><span class="badge bg-<?= ($akun['role'] == 'Admin') ? 'primary' : 'success';?>"><?= $akun['role']; ?></span></td>
+                                        <td><?= $akun['nama'] ?></td>
+                                        <td><?= $akun['username'] ?></td>
+                                        <td><?= $akun['email'] ?></td>
+                                        <td><?= $akun['no_hp'] ?></td>
+                                        <td><?= $akun['alamat'] ?></td>
+                                        <td class="text-center"><span class="badge bg-<?= ($akun['role'] == 'Admin') ? 'primary' : 'success' ?>"><?= $akun['role'] ?></span></td>
                                         <td class="text-center">
                                         
-                                            <button type="button" class="btn btn-sm btn-outline-primary mb-1" data-bs-toggle="modal" data-bs-target="#modalUbah<?= $akun['id_akun']; ?>">
+                                            <button type="button" class="btn btn-sm btn-outline-primary mb-1" data-bs-toggle="modal" data-bs-target="#modalUbah<?= $akun['id_akun'] ?>">
                                             <i class="bi bi-pen"></i> Ubah
                                             </button>
 
-                                            <button type="button" class="btn btn-sm btn-outline-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $akun['id_akun']; ?>">
+                                            <button type="button" class="btn btn-sm btn-outline-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $akun['id_akun'] ?>">
                                             <i class="bi bi-trash"></i> Hapus
                                             </button>
                                             
@@ -225,11 +209,11 @@
                             <!-- Header -->
                             <div class="card-header bg-info d-flex justify-content-between align-items-center py-2">
                                 <div class="me-2 overflow-hidden">
-                                    <h6 class="mb-0 fw-semibold text-truncate"><?= $akun['nama']; ?></h6>
-                                    <small class="text-muted text-truncate d-block">@<?= $akun['username']; ?></small>
+                                    <h6 class="mb-0 fw-semibold text-truncate"><?= $akun['nama'] ?></h6>
+                                    <small class="text-muted text-truncate d-block">@<?= $akun['username'] ?></small>
                                 </div>
                                 <span class="badge rounded-pill px-3 py-2 bg-<?= ($akun['role'] == 'Admin') ? 'primary' : 'success'; ?>">
-                                    <?= $akun['role']; ?>
+                                    <?= $akun['role'] ?>
                                 </span>
                             </div>
 
@@ -239,17 +223,17 @@
 
                                     <div class="col-12">
                                         <span class="text-muted fw-medium">Email</span>
-                                        <div class="text-truncate"><?= $akun['email']; ?></div>
+                                        <div class="text-truncate"><?= $akun['email'] ?></div>
                                     </div>
 
                                     <div class="col-6">
                                         <span class="text-muted fw-medium">No HP</span>
-                                        <div class="text-truncate"><?= $akun['no_hp']; ?></div>
+                                        <div class="text-truncate"><?= $akun['no_hp'] ?></div>
                                     </div>
 
                                     <div class="col-12">
                                         <span class="text-muted fw-medium">Alamat</span>
-                                        <div class="text-truncate"><?= $akun['alamat']; ?></div>
+                                        <div class="text-truncate"><?= $akun['alamat'] ?></div>
                                     </div>
 
                                 </div>
@@ -264,7 +248,7 @@
                                     </button>
 
                                     <button class="btn btn-sm btn-outline-danger w-100 rounded-pill"
-                                        data-bs-toggle="modal" data-bs-target="#modalHapus<?= $akun['id_akun']; ?>">
+                                        data-bs-toggle="modal" data-bs-target="#modalHapus<?= $akun['id_akun'] ?>">
                                         <i class="bi bi-trash me-1"></i> Hapus
                                     </button>
                                 </div>
@@ -338,8 +322,8 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" name="tambah" class="btn btn-success"><i class="bi bi-person-plus me-1"></i>
-                                Tambah</button>
+                                <button type="submit" name="tambah" class="btn btn-success"><i class="bi bi-floppy me-1"></i>
+                                Simpan</button>
                                 </form>
                             </div>
                             
@@ -350,7 +334,7 @@
 
             <!-- Modal Ubah Akun -->
                 <?php foreach ($data_akun as $akun) : ?>
-                <div class="modal fade" id="modalUbah<?= $akun['id_akun']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modalUbah<?= $akun['id_akun'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
                         <div class="modal-content">
 
@@ -358,7 +342,7 @@
                                 <h5 class="modal-title" id="exampleModalLabel">Ubah <?= $laman; ?>  Dengan :
                                     <ul>
                                         <li>Username : <span class="badge bg-info"><?= $akun['username'];?></span></li>
-                                        <li>Role : <span class="badge bg-<?= ($akun['role'] == 'Admin') ? 'primary' : 'success';?>"><?= $akun['role']; ?></span></li>
+                                        <li>Role : <span class="badge bg-<?= ($akun['role'] == 'Admin') ? 'primary' : 'success' ?>"><?= $akun['role'] ?></span></li>
                                     </ul>
                                 </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"/>
@@ -367,15 +351,15 @@
                             <div class="modal-body">
 
                                 <form action="" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="id_akun" value="<?= $akun['id_akun']; ?>">
+                                    <input type="hidden" name="id_akun" value="<?= $akun['id_akun'] ?>">
 
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="nama" id="floatingInput" class="form-control" minlength="5" placeholder="Nama" value="<?= $akun['nama']; ?>" required>
+                                        <input type="text" name="nama" id="floatingInput" class="form-control" minlength="5" placeholder="Nama" value="<?= $akun['nama'] ?>" required>
                                         <label for="floatingInput">Nama</label>
                                     </div>
 
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="username" id="floatingInput" class="form-control" minlength="5" placeholder="Username" value="<?= $akun['username']; ?>" required>
+                                        <input type="text" name="username" id="floatingInput" class="form-control" minlength="5" placeholder="Username" value="<?= $akun['username'] ?>" required>
                                         <label for="floatingInput">Username</label>
                                     </div>
 
@@ -390,26 +374,26 @@
                                     </div>
 
                                     <div class="form-floating mb-3">
-                                        <input type="number" name="no_hp" id="floatingInput" class="form-control" minlength="12" placeholder="Nomor Handphone" value="<?= $akun['no_hp']; ?>" required>
+                                        <input type="number" name="no_hp" id="floatingInput" class="form-control" minlength="12" placeholder="Nomor Handphone" value="<?= $akun['no_hp'] ?>" required>
                                         <label for="floatingInput">Nomor Handphone</label>
                                     </div>
 
                                     <div class="form-floating mb-2">
-                                        <textarea name="alamat" id="floatingInput" class="form-control" minlength="5" placeholder="" required><?= $akun['alamat']; ?></textarea>
+                                        <textarea name="alamat" id="floatingInput" class="form-control" minlength="5" placeholder="" required><?= $akun['alamat'] ?></textarea>
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label for="role">Role</label>
                                         <select name="role" id="role" class="form-control" minlength="5" required>
-                                        <option value="Admin" <?= $akun['role'] == 'Admin' ? 'selected' : null ; ?> >Admin</option>
-                                        <option value="Guru" <?= $akun['role'] == 'Guru' ? 'selected' : null ; ?> >Guru</option>
+                                        <option value="Admin" <?= ($akun['role'] == 'Admin') ? 'selected' : '' ?> >Admin</option>
+                                        <option value="User" <?= ($akun['role'] == 'User') ? 'selected' : '' ?> >User</option>
                                         </select>
                                     </div>
 
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" name="ubah" class="btn btn-primary"><i class="bi bi-pen"></i> Ubah</button>
+                                <button type="submit" name="ubah" class="btn btn-primary"><i class="bi bi-floppy me-1"></i> Simpan</button>
                                 </form>
                             </div>
 
@@ -421,7 +405,7 @@
 
             <!-- Modal Hapus Akun -->
                 <?php foreach ($data_akun as $akun) : ?>
-                <div class="modal fade" id="modalHapus<?= $akun['id_akun']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modalHapus<?= $akun['id_akun'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
@@ -432,12 +416,12 @@
 
                             <div class="modal-body">
                                 <form action="" method="post">
-                                <input type="hidden" name="id_akun" value="<?= $akun['id_akun']; ?>">
+                                <input type="hidden" name="id_akun" value="<?= $akun['id_akun'] ?>">
                                 <!-- <input type="hidden" name="fotoLama" value="<?//= $akun['foto']; ?>"> -->
                                 <h6>Yakin Ingin Menghapus <?= $laman; ?> Dengan :
                                     <ul>
-                                        <li>Username : <span class="badge bg-info"><?= $akun['username']; ?></span></li>
-                                        <li>Role : <span class="badge bg-<?= ($akun['role'] == 'Admin') ? 'primary' : 'success';?>"><?= $akun['role']; ?></span></li>
+                                        <li>Username : <span class="badge bg-info"><?= $akun['username'] ?></span></li>
+                                        <li>Role : <span class="badge bg-<?= ($akun['role'] == 'Admin') ? 'primary' : 'success' ?>"><?= $akun['role'] ?></span></li>
                                     </ul>
                                 </h6>
                             </div>
