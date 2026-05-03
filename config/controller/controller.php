@@ -31,6 +31,38 @@
     // Akun Section
 
         // Tambah Akun
+        function daftar_akun_baru($post)
+        {
+            global $db;
+
+            $nama      = htmlspecialchars(strip_tags($post['nama']));
+            $username  = htmlspecialchars(strip_tags($post['username']));
+            $password  = htmlspecialchars(strip_tags($post['password']));
+            $email     = htmlspecialchars(strip_tags($post['email']));
+            $no_hp     = htmlspecialchars(strip_tags($post['no_hp']));
+            $alamat    = htmlspecialchars(strip_tags($post['alamat']));
+            $role     = "User";
+
+            // Cek role
+            if (empty($_POST['role'])) {
+                echo "<script>
+                alert('Role wajib dipilih!');
+                document.location.href = 'admin_user.php';
+              </script>";
+            }
+            
+            // enkripsi password
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            
+            // query tambah data
+            $query = "INSERT INTO akun VALUES(NULL, '$nama', '$username', '$password', '$email', '$no_hp', '$alamat', '$role')";
+            
+            mysqli_query($db, $query);
+            
+            return mysqli_affected_rows($db);
+        }
+
+        // Tambah Akun
         function tambah_akun($post)
         {
             global $db;

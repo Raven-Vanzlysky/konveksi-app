@@ -1,15 +1,18 @@
-const themeSwitch = document.getElementById('themeSwitch');
-const html = document.documentElement;
+const toggle = document.getElementById('themeSwitch');
+const root = document.documentElement;
 
-// Load saved theme
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    html.setAttribute('data-bs-theme', savedTheme);
-    themeSwitch.checked = savedTheme === 'dark';
-}
+// set theme
+const setTheme = (theme) => {
+  root.setAttribute('data-bs-theme', theme);
+  localStorage.setItem('theme', theme);
+};
 
-themeSwitch.addEventListener('change', function () {
-    const theme = this.checked ? 'dark' : 'light';
-    html.setAttribute('data-bs-theme', theme);
-    localStorage.setItem('theme', theme);
-});
+// load theme awal
+const saved = localStorage.getItem('theme') || 'light';
+setTheme(saved);
+toggle.checked = saved === 'dark';
+
+// event switch
+toggle.onchange = () => {
+  setTheme(toggle.checked ? 'dark' : 'light');
+};

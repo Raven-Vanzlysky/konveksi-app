@@ -26,8 +26,8 @@
 
                     <!-- MENU -->
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="<?= $halmut;?>">Katalog</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= $halpem;?>">Pesanan</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $halmut ?>">Katalog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $hallog ?>">Pesan</a></li>
                         <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
                     </ul>
                     

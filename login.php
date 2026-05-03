@@ -51,7 +51,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="id" data-bs-theme="dark">
+<html lang="id" data-bs-theme="auto">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,27 +64,29 @@
         -webkit-user-drag: none;
       }
     </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-icons.min.css" rel="stylesheet">
   </head>
   <body>
 
-    <header>
-      <div></div>
-    </header>
+    <main class="container d-flex justify-content-center align-items-center min-vh-100">
 
-    <main class="container d-flex justify-content-center">
-
-      <div class="card mt-5 animate__animated animate__flipInY animate__fast" style="width: 20rem; height: 25rem;">
+      <div class="card animate__animated animate__flipInY animate__fast" style="width: 20rem;">
 
         <form action="" method="post">
 
-          <div class="card-header">
-            <img class="img animate__animated animate__zoomIn animate__slow" style="width: 100px; height: 100px;" src="assets/img/g1W.png" alt="">
-            <h3 class="ms-3">Login</h3>
+          <!-- HEADER -->
+          <div class="card-header bg-success text-center">
+            <img class="animate__animated animate__zoomIn animate__slow"
+                style="width: 100px; height: 100px;"
+                src="assets/img/g1W.png"
+                alt="">
+            <h3 class="mt-2">Login</h3>
           </div>
 
+          <!-- BODY -->
           <div class="card-body">
-            
+
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username" required>
               <label for="floatingInput">Username</label>
@@ -95,10 +97,23 @@
               <label for="floatingPassword">Password</label>
             </div>
 
-            <div class="button mt-2">
-              <button class="btn btn-success w-100 py-2 mb-3" type="submit" name="login">Login</button>
-              <p class="mt-2 text-body-secondary text-end">&copy;Raven</p>
+            <button class="btn btn-success w-100 py-2" type="submit" name="login">
+              Login
+            </button>
+
+          </div>
+
+          <!-- FOOTER -->
+          <div class="card-footer text-body-secondary">
+
+            <div class="d-flex justify-content-between">
+              <small>Belum punya akun?</small>
+              <small>&copy;Larissa Collection</small>
             </div>
+
+            <a href="register.php" class="text-info mt-1">
+              Register
+            </a>
 
           </div>
 
@@ -109,7 +124,7 @@
     </main>
     
     <footer>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="assets/js/bootstrap.bundle.min.js"></script>
     </footer>
 
   </body>
