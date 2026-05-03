@@ -1,6 +1,15 @@
 <?php
 
+    // jika tombol buat di tekan jalankan script berikut
+    if (isset($_POST['buatakun'])) {
+        $result = daftar_akun_baru($_POST) > 0;
 
+        $popup = true;
+        $statusPopup = $result ? 'Berhasil' : 'Gagal';
+        $warnaPopup = $result ? 'success' : 'danger';
+        $iconPopup = $result ? 'check2-circle' : 'x-circle';
+        $popupEksekusi = 'Ditambahkan';
+    }
 
 ?>
 <!DOCTYPE html>
@@ -67,19 +76,19 @@
                                 </label>
                             </div> -->
 
-                        </form>
-
-                    </div>
-
-                    <!-- Footer -->
-                    <div class="card-footer text-center">
-                        <button type="submit" class="btn btn-primary w-100 mb-2">
-                            Daftar
-                        </button>
-                        <small>
-                            Sudah punya akun? <a href="login.php">Login</a>
-                        </small>
-                    </div>
+                            
+                        </div>
+                        
+                        <!-- Footer -->
+                        <div class="card-footer text-center">
+                            <button type="submit" name="buatakun" class="btn btn-primary w-100 mb-2">
+                                Daftar
+                            </button>
+                            <small>
+                                Sudah punya akun? <a href="login.php">Login</a>
+                            </small>
+                        </div>
+                    </form>
 
                 </div>
 
