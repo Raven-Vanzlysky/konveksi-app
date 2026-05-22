@@ -295,6 +295,66 @@
     // .Akun Section
 
     // Bahan Section
+
+        // Tambah Bahan
+        function tambah_bahan($post)
+        {
+            global $db;
+
+            $jenis_bahan    = htmlspecialchars(strip_tags($post['jenis_bahan']));
+            $id_warna       = htmlspecialchars(strip_tags($post['id_warna']));
+            $stok           = htmlspecialchars(strip_tags($post['stok']));
+            $harga_bahan    = htmlspecialchars(strip_tags($post['harga_bahan']));
+
+            // insert ke tabel bahan
+            $queryBahan = "INSERT INTO bahan 
+                VALUES(NULL, '$jenis_bahan', '$id_warna', '$stok', '$harga_bahan')
+            ";
+
+            mysqli_query($db, $queryBahan);
+
+            return mysqli_affected_rows($db);
+        }
+
+        // Ubah Bahan
+        function ubah_bahan($post)
+        {
+            global $db;
+            
+            $id_bahan       = htmlspecialchars(strip_tags($post['id_bahan']));
+            $jenis_bahan    = htmlspecialchars(strip_tags($post['jenis_bahan']));
+            $id_warna       = htmlspecialchars(strip_tags($post['id_warna']));
+            $stok           = htmlspecialchars(strip_tags($post['stok']));
+            $harga_bahan    = htmlspecialchars(strip_tags($post['harga_bahan']));
+
+            $queryBahan = "UPDATE bahan SET 
+                jenis_bahan = '$jenis_bahan',
+                id_warna = '$id_warna',
+                stok = '$stok',
+                harga_bahan = '$harga_bahan'
+                WHERE id_bahan = $id_bahan";
+
+            mysqli_query($db, $queryBahan);
+
+            return mysqli_affected_rows($db);
+
+        }
+
+        // Hapus Bahan
+        function hapus_bahan($post)
+        {
+            global $db;
+            
+            $id = strip_tags($post['id_bahan']);
+            
+            // query hapus data pengguna
+            $query = "DELETE FROM bahan WHERE id_bahan = $id";
+            
+            mysqli_query($db, $query);
+            
+            return mysqli_affected_rows($db);
+        }
+    
     // .Bahan Section
 
 ?>

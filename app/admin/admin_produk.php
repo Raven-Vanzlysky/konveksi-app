@@ -3,20 +3,21 @@
     session_start();
 
     $laman = 'Produk';
+    $fileLaman = 'admin_produk.php';
+
     include '../../assets/layout/admin/header.php';
 
-    // Bahan
-        // Data Akun
+    // Warna
+        // Data Warna
         if(isset($_POST['cari'])) 
         {
             $kata_cari = htmlspecialchars(strip_tags($_POST['kata_cari']));
-            $data_bahan = select("SELECT bahan.*, warna.* FROM bahan
-            JOIN warna ON bahan.id_warna = warna.id_warna
-            WHERE CONCAT(jenis_bahan, nama_warna, stok, harga_bahan) LIKE '%$kata_cari%' ORDER BY jenis_bahan ASC, nama_warna ASC");
+            $data_warna = select("SELECT * FROM warna
+            WHERE CONCAT(nama_warna) LIKE '%$kata_cari%' ORDER BY nama_warna ASC");
         } else 
         {
-            $data_bahan = select("SELECT bahan.*, warna.* FROM bahan
-            JOIN warna ON bahan.id_warna = warna.id_warna ORDER BY jenis_bahan ASC, nama_warna ASC");
+            $data_warna = select("SELECT * FROM warna
+           ORDER BY nama_warna ASC");
         }
 
         // jika tombol tambah di tekan jalankan script berikut
@@ -44,6 +45,54 @@
         // jika tombol hapus di tekan jalankan script berikut
         if (isset($_POST['hapus'])) {
             $result = hapus_akun($_POST) > 0;
+
+            $popup = true;
+            $statusPopup = $result ? 'Berhasil' : 'Gagal';
+            $warnaPopup = $result ? 'success' : 'danger';
+            $iconPopup = $result ? 'check2-circle' : 'x-circle';
+            $popupEksekusi = 'Dihapus';
+        }
+    // .Warna
+
+    // Bahan
+        // Data Akun
+        if(isset($_POST['cari'])) 
+        {
+            $kata_cari = htmlspecialchars(strip_tags($_POST['kata_cari']));
+            $data_bahan = select("SELECT bahan.*, warna.* FROM bahan
+            JOIN warna ON bahan.id_warna = warna.id_warna
+            WHERE CONCAT(jenis_bahan, nama_warna, stok, harga_bahan) LIKE '%$kata_cari%' ORDER BY jenis_bahan ASC, nama_warna ASC");
+        } else 
+        {
+            $data_bahan = select("SELECT bahan.*, warna.* FROM bahan
+            JOIN warna ON bahan.id_warna = warna.id_warna ORDER BY jenis_bahan ASC, nama_warna ASC");
+        }
+
+        // jika tombol tambah di tekan jalankan script berikut
+        if (isset($_POST['tambahBahan'])) {
+            $result = tambah_bahan($_POST) > 0;
+
+            $popup = true;
+            $statusPopup = $result ? 'Berhasil' : 'Gagal';
+            $warnaPopup = $result ? 'success' : 'danger';
+            $iconPopup = $result ? 'check2-circle' : 'x-circle';
+            $popupEksekusi = 'Ditambahkan';
+        }
+
+        // jika tombol ubah di tekan jalankan script berikut
+        if (isset($_POST['ubahBahan'])) {
+            $result = ubah_bahan($_POST) > 0;
+
+            $popup = true;
+            $statusPopup = $result ? 'Berhasil' : 'Gagal';
+            $warnaPopup = $result ? 'success' : 'danger';
+            $iconPopup = $result ? 'check2-circle' : 'x-circle';
+            $popupEksekusi = 'Diubah';
+        }
+
+        // jika tombol hapus di tekan jalankan script berikut
+        if (isset($_POST['hapusBahan'])) {
+            $result = hapus_bahan($_POST) > 0;
 
             $popup = true;
             $statusPopup = $result ? 'Berhasil' : 'Gagal';
@@ -106,6 +155,10 @@
     <!-- Dashboard Main -->
     <main class="overflow-auto" style="flex:1;">
 
+        <!-- Popup -->
+            <?php require_once '../popup.php';?>
+        <!-- .Popup -->
+
         <!-- View Data Bahan -->
         <section class="mb-3 mb-md-4" aria-label="Bahan View">
 
@@ -129,7 +182,7 @@
                                 </form>
                             </div>
 
-                            <button type="button" class="btn btn-primary btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#modalTambah">
+                            <button type="button" class="btn btn-primary btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#modalTambahBahan">
                             <i class="bi bi-person-plus me-1"></i>
                                 Tambah
                             </button>  
@@ -168,11 +221,11 @@
                                         <td><?= $bahan['harga_bahan'] ?></td>
                                         <td class="text-center">
                                         
-                                            <button type="button" class="btn btn-sm btn-outline-primary mb-1" data-bs-toggle="modal" data-bs-target="#modalUbah<?= $bahan['id_bahan'] ?>">
+                                            <button type="button" class="btn btn-sm btn-outline-primary mb-1" data-bs-toggle="modal" data-bs-target="#modalUbahBahan<?= $bahan['id_bahan'] ?>">
                                             <i class="bi bi-pen"></i> Ubah
                                             </button>
 
-                                            <button type="button" class="btn btn-sm btn-outline-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $bahan['id_bahan'] ?>">
+                                            <button type="button" class="btn btn-sm btn-outline-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalHapusBahan<?= $bahan['id_bahan'] ?>">
                                             <i class="bi bi-trash"></i> Hapus
                                             </button>
                                             
@@ -200,7 +253,7 @@
 
                     <div class="card-header py-2">
                         <div class="card-wrap d-flex justify-content-between align-items-center">
-                                <h3 class="card-title"><?= $laman; ?></h3>
+                                <h3 class="card-title">Bahan</h3>
 
                                 <form class="form" action="" method="post">
                                 <div class="input-group">
@@ -217,7 +270,7 @@
                         <button type="button"
                             class="btn btn-sm btn-primary w-100 rounded-pill fw-semibold shadow-sm mb-2"
                             data-bs-toggle="modal"
-                            data-bs-target="#modalTambah">
+                            data-bs-target="#modalTambahBahan">
                             <i class="bi bi-person-plus me-1"></i>
                             Tambah Akun
                         </button>
@@ -453,6 +506,155 @@
 
         </section>
         <!-- .View Data Design -->
+
+        <!-- Modal Bahan -->
+        <section class="modal-bahan">
+
+            <!-- Modal Tambah Bahan -->
+                <div class="modal fade" id="modalTambahBahan" tabindex="-1" aria-labelledby="modalTambahBahan" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+
+                            <div class="modal-header bg-success">
+                                <h5 class="modal-title" id="modalTambahBahan">Tambah</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"/>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <form action="" method="post" enctype="multipart/form-data">
+
+                                <div class="form-floating mb-2">
+                                    <input type="text" name="jenis_bahan" id="floatingInput" class="form-control" minlength="5" placeholder="Jenis Bahan" required>
+                                    <label for="floatingInput">Jenis Bahan</label>
+                                </div>
+
+                                <div class="form-floating mb-2">
+                                    <input type="number" name="stok" id="floatingInput" class="form-control" minlength="1" placeholder="Stok" required>
+                                    <label for="floatingInput">Stok</label>
+                                </div>
+                                
+                                <div class="form-floating mb-2">
+                                    <input type="number" name="harga_bahan" id="floatingInput" class="form-control" minlength="4" placeholder="Harga Bahan" required>
+                                    <label for="floatingInput">Harga Bahan</label>
+                                </div>
+
+                                <div class="form-group mb-2">
+                                    <label for="nama_warna">Warna</label>
+                                    <select name="id_warna" id="nama_warna" class="form-control" minlength="5" required>
+                                    <option value="" disabled selected>-- Pilih --</option>
+                                    <?php foreach ($data_warna as $warna) : ?>
+                                    <option value="<?= $warna['id_warna'] ?>"><?= $warna['nama_warna'] ?></option>
+                                    <?php endforeach; ?>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" name="tambahBahan" class="btn btn-success"><i class="bi bi-floppy me-1"></i>
+                                Simpan</button>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            <!-- /Modal Tambah Bahan -->
+
+            <!-- Modal Ubah Bahan -->
+                <?php foreach ($data_bahan as $bahan) : ?>
+                <div class="modal fade" id="modalUbahBahan<?= $bahan['id_bahan'] ?>" tabindex="-1" aria-labelledby="modalUbahBahan" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+
+                            <div class="modal-header bg-primary">
+                                <h5 class="modal-title" id="modalUbahBahan">Ubah Bahan Dengan :
+                                    <ul>
+                                        <li>Jenis Bahan : <?= $bahan['jenis_bahan'];?></li>
+                                        <li>Warna : <?= $bahan['nama_warna'] ?></li>
+                                    </ul>
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"/>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="id_bahan" value="<?= $bahan['id_bahan'] ?>">
+
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="jenis_bahan" id="floatingInput" class="form-control" minlength="5" placeholder="Jenis Bahan" value="<?= $bahan['jenis_bahan'] ?>" required>
+                                        <label for="floatingInput">Jenis Bahan</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <input type="number" name="stok" id="floatingInput" class="form-control" minlength="1" placeholder="Stok" value="<?= $bahan['stok'] ?>" required>
+                                        <label for="floatingInput">Stok</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <input type="number" name="harga_bahan" id="floatingInput" class="form-control" minlength="4" placeholder="Harga Bahan" value="<?= $bahan['harga_bahan'] ?>" required>
+                                        <label for="floatingInput">Harga Bahan</label>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label for="nama_warna">Warna</label>
+                                        <select name="id_warna" id="nama_warna" class="form-control" required>
+                                        <?php foreach ($data_warna as $warna) : ?>
+                                        <option value="<?= $warna['id_warna'] ?>" <?= ($bahan['id_warna'] == $warna['id_warna']) ? 'selected' : '' ?> ><?= $warna['nama_warna'] ?></option>
+                                        <?php endforeach; ?>
+                                        </select>
+                                    </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" name="ubahBahan" class="btn btn-primary"><i class="bi bi-floppy me-1"></i> Simpan</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            <!-- /Modal Ubah Bahan -->
+
+            <!-- Modal Hapus Bahan -->
+                <?php foreach ($data_bahan as $bahan) : ?>
+                <div class="modal fade" id="modalHapusBahan<?= $bahan['id_bahan'] ?>" tabindex="-1" aria-labelledby="modalHapusBahan" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header bg-danger">
+                                <h5 class="modal-title" id="modalHapusBahan">Hapus <?= $laman; ?></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"/>
+                            </div>
+
+                            <div class="modal-body">
+                                <form action="" method="post">
+                                <input type="hidden" name="id_bahan" value="<?= $bahan['id_bahan'] ?>">
+                                <h6>Yakin Ingin Menghapus Bahan Dengan :
+                                    <ul>
+                                        <li>Jenis Bahan : <?= $bahan['jenis_bahan'] ?></li>
+                                        <li>Warna : <?= $bahan['nama_warna'] ?></li>
+                                    </ul>
+                                </h6>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger" name="hapusBahan"><i class="bi bi-trash"></i> Hapus</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            <!-- /Modal Hapus Bahan -->
+            
+        </section>
+        <!-- /Modal Bahan -->
 
     </main>
 
