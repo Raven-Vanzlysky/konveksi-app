@@ -21,11 +21,52 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-success bg-success">
             <div class="container">
-                
-                <!-- BRAND (KIRI SENDIRI) -->
-                <a class="navbar-brand fw-bold" href="#">Larisa Collection</a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <!-- FOTO PROFIL + DROPDOWN -->
+                <div class="dropdown">
+                    <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+
+                        <!-- FOTO PROFIL -->
+                        <img src="../../assets/img/users/g1W.png"
+                            alt="Profile"
+                            width="40"
+                            height="40"
+                            class="rounded-circle border border-light me-2"
+                            style="object-fit: cover;">
+
+                        <!-- NAMA USER -->
+                        <span class="fw-semibold">
+                            <?= $_SESSION['username']; ?>
+                        </span>
+                    </a>
+
+                    <!-- DROPDOWN MENU -->
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="kelola_akun.php">
+                                Kelola Data Akun
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item text-danger" href="../../logout.php">
+                                Sign Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- BUTTON RESPONSIVE -->
+                <button class="navbar-toggler" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -34,15 +75,21 @@
 
                     <!-- MENU -->
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="<?= $halmut ?>">Katalog</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= $halpem ?>">Pesanan</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $halmut ?>">Katalog</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#kontak">Kontak</a>
+                        </li>
                     </ul>
-                    
+
                     <!-- TOGGLE -->
-                    <div class="form-check form-switch text-white me-3">
+                    <div class="form-check form-switch text-white ms-3">
                         <input class="form-check-input" type="checkbox" id="themeSwitch">
-                        <label class="form-check-label" for="themeSwitch">Tema</label>
+                        <label class="form-check-label" for="themeSwitch">
+                            Tema
+                        </label>
                     </div>
 
                 </div>

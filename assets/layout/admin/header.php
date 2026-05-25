@@ -35,27 +35,101 @@
 
                 <nav aria-label="Sidebar Navigation">
                     <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item"><a href="./" class="nav-link <?= ($laman == 'Dashboard') ? 'active' : '' ?> text-white"><i class="bi bi-house-door me-2"></i>Dashboard</a></li>
-                    <li class="nav-item"><a href="admin_user.php" class="nav-link <?= ($laman == 'Pengguna') ? 'active' : '' ?> text-white"><i class="bi bi-people me-2"></i>Pengguna</a></li>
-                    <li class="nav-item"><a href="admin_pesanan.php" class="nav-link <?= ($laman == 'Pesanan') ? 'active' : '' ?> text-white"><i class="bi bi-bag me-2"></i>Pesanan</a></li>
-                    <li class="nav-item"><a href="admin_produk.php" class="nav-link <?= ($laman == 'Produk') ? 'active' : '' ?> text-white"><i class="bi bi-basket me-2"></i>Produk</a></li>
-                    <li class="nav-item"><a href="admin_warna.php" class="nav-link <?= ($laman == 'Warna') ? 'active' : '' ?> text-white"><i class="bi bi-palette me-2"></i>Warna</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white"><i class="bi bi-file-earmark-text me-2"></i>Laporan</a></li>
-                    <!-- <li class="nav-item"><a href="#" class="nav-link text-white"><i class="bi bi-gear me-2"></i>Settings</a></li> -->
+
+                        <li class="nav-item">
+                            <a href="./"
+                            class="nav-link <?= ($laman == 'Dashboard') ? 'active' : '' ?> text-white">
+                                <i class="bi bi-house-door me-2"></i>Dashboard
+                            </a>
+                        </li>
+
+                        <!-- DROPDOWN KATALOG -->
+                        <li class="nav-item">
+                            <button class="btn nav-link w-100 text-white text-start d-flex justify-content-between align-items-center px-3 py-2 rounded-0 border-0 bg-transparent
+                            <?= ($laman == 'Katalog' || $laman == 'Produk' || $laman == 'Warna' || $laman == 'Bahan' || $laman == 'Desain') ? 'active' : '' ?>"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#produkCollapse"
+                            aria-expanded="false"
+                            aria-controls="produkCollapse">
+                                <span><i class="bi bi-archive me-2"></i>Produk</span>
+                                <i class="bi bi-chevron-down small"></i>
+                            </button>
+
+                            <div class="collapse" id="produkCollapse">
+                                <ul class="nav flex-column mb-0">
+                                    <li class="nav-item">
+                                        <a href="admin_produk.php"
+                                        class="nav-link text-white ps-4 <?= ($laman == 'Produk') ? 'active' : '' ?>">
+                                            Data Produk
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="admin_desain.php"
+                                        class="nav-link text-white ps-4 <?= ($laman == 'Desain') ? 'active' : '' ?>">
+                                            Data Desain
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="admin_bahan.php"
+                                        class="nav-link text-white ps-4 <?= ($laman == 'Bahan') ? 'active' : '' ?>">
+                                            Data Bahan
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="admin_warna.php"
+                                        class="nav-link text-white ps-4 <?= ($laman == 'Warna') ? 'active' : '' ?>">
+                                            Data Warna
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="admin_user.php"
+                            class="nav-link <?= ($laman == 'Pengguna') ? 'active' : '' ?> text-white">
+                                <i class="bi bi-people me-2"></i>Pengguna
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="admin_pesanan.php"
+                            class="nav-link <?= ($laman == 'Pesanan') ? 'active' : '' ?> text-white">
+                                <i class="bi bi-bag me-2"></i>Pesanan
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#"
+                            class="nav-link text-white">
+                                <i class="bi bi-file-earmark-text me-2"></i>Laporan
+                            </a>
+                        </li>
+
                     </ul>
                 </nav>
 
                 <hr>
 
-                <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="https://placehold.co/32x32" alt="User" class="rounded-circle me-2">
-                    <strong><?= $_SESSION['username'] ?></strong>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="../../logout.php">Sign out</a></li>
-                    </ul>
+                <div>
+                    <button class="btn btn-dark w-100 text-start d-flex align-items-center justify-content-between" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#userMenuCollapse"
+                        aria-expanded="false"
+                        aria-controls="userMenuCollapse">
+                        <span class="d-flex align-items-center">
+                            <img src="https://placehold.co/32x32" alt="User" class="rounded-circle me-2">
+                            <strong><?= $_SESSION['username'] ?></strong>
+                        </span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="collapse mt-2" id="userMenuCollapse">
+                        <ul class="list-unstyled mb-0">
+                            <li><a class="btn btn-outline-light w-100 text-start mb-1" href="#">Profile</a></li>
+                            <li><a class="btn btn-outline-light w-100 text-start" href="../../logout.php">Sign out</a></li>
+                        </ul>
+                    </div>
                 </div>
 
                 </aside>
