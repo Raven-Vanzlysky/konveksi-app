@@ -84,9 +84,9 @@
 
           <!-- HEADER -->
           <div class="card-header bg-success text-center">
-            <img class="animate__animated animate__zoomIn animate__slow"
+            <img class="img"
                 style="width: 100px; height: 100px;"
-                src="assets/img/g1W.png"
+                src="assets/img/logo/g1W.png"
                 alt="">
             <h3 class="mt-2">Login</h3>
           </div>

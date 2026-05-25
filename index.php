@@ -4,6 +4,11 @@
     $halmut = './';
     $hallog = 'login.php';
 
+    require_once __DIR__ . '/config/db/db.php';
+    require_once __DIR__ . '/config/controller/controller.php';
+
+    $data_produk = select("SELECT * FROM produk ORDER BY nama_produk ASC");
+
     include 'assets/layout/katalog/header.php';
 
 ?>
@@ -76,42 +81,58 @@
         <section id="katalog" class="py-5">
             <div class="container">
                 <h2 class="text-center mb-4 fw-bold">Katalog Produk</h2>
-                <div class="row g-4">
 
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="assets/img/1.jpeg" class="card-img-top" alt="Kaos Custom">
-                            <div class="card-body">
-                                <h5 class="card-title">Kaos Custom</h5>
-                                <p class="card-text">Bahan cotton combed 24s & 30s.</p>
-                                <span class="badge bg-success">Mulai 65K</span>
-                            </div>
+                <?php if (count($data_produk) > 3) : ?>
+                    <div id="catalogCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-wrap="false">
+                        <div class="carousel-inner">
+                            <?php foreach (array_chunk($data_produk, 3) as $index => $produkChunk) : ?>
+                                <div class="carousel-item<?= $index === 0 ? ' active' : '' ?>">
+                                    <div class="row g-4">
+                                        <?php foreach ($produkChunk as $produk) : ?>
+                                            <div class="col-md-4">
+                                                <div class="card h-100">
+                                                    <?php if (!empty($produk['gambar_produk'])) : ?>
+                                                        <img src="assets/img/produk/<?= htmlspecialchars($produk['gambar_produk']) ?>" class="card-img-top" alt="<?= htmlspecialchars($produk['nama_produk']) ?>">
+                                                    <?php endif; ?>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><?= htmlspecialchars($produk['nama_produk']) ?></h5>
+                                                        <p class="card-text"><?= htmlspecialchars($produk['deskripsi']) ?></p>
+                                                        <a href="login.php" class="btn btn-success btn-sm px-3 rounded-pill">Pesan Sekarang</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#catalogCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Sebelumnya</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#catalogCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Berikutnya</span>
+                        </button>
                     </div>
-
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="assets/img/2.jpeg" class="card-img-top" alt="Hoodie Custom">
-                            <div class="card-body">
-                                <h5 class="card-title">Hoodie</h5>
-                                <p class="card-text">Bahan fleece premium.</p>
-                                <span class="badge bg-success">Mulai 120K</span>
+                <?php else : ?>
+                    <div class="row g-4">
+                        <?php foreach ($data_produk as $produk) : ?>
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <?php if (!empty($produk['gambar_produk'])) : ?>
+                                        <img src="assets/img/produk/<?= htmlspecialchars($produk['gambar_produk']) ?>" class="card-img-top" alt="<?= htmlspecialchars($produk['nama_produk']) ?>">
+                                    <?php endif; ?>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= htmlspecialchars($produk['nama_produk']) ?></h5>
+                                        <p class="card-text"><?= htmlspecialchars($produk['deskripsi']) ?></p>
+                                        <a href="login.php" class="btn btn-success btn-sm px-3 rounded-pill">Pesan Sekarang</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
-
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="assets/img/3.jpeg" class="card-img-top" alt="Kemeja Seragam">
-                            <div class="card-body">
-                                <h5 class="card-title">Kemeja Seragam</h5>
-                                <p class="card-text">Custom warna dan bordir logo.</p>
-                                <span class="badge bg-success">Mulai 95K</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <?php endif; ?>
             </div>
         </section>
 
@@ -127,10 +148,6 @@
                     <div class="col-md-4">
                         <h5 class="fw-bold">Harga Terjangkau</h5>
                         <p>Cocok untuk komunitas dan perusahaan.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h5 class="fw-bold">Pengerjaan Cepat</h5>
-                        <p>Estimasi produksi 3–7 hari kerja.</p>
                     </div>
                 </div>
             </div>
